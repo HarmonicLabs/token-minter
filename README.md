@@ -1,6 +1,6 @@
 # Token Minter
 
-Standalone Cardano token minter. Compiles a plu-ts minting policy, lets you connect a CIP-30 wallet, and mints any asset name + amount under a policy parameterized by the bytestring you provide.
+Standalone Cardano token minter. Compiles a plu-ts minting policy, lets you connect a CIP-30 wallet, and mints any asset name + amount under a policy parameterized by a name you provide.
 
 ## Setup
 
