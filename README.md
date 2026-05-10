@@ -23,8 +23,8 @@ The plu-ts policy in `contracts/tokenPolicy.ts` is a single function parameteriz
 2. Applies your input `bytestring` via `Application(body, UPLCConst.byteString(param))`
 3. Compiles the result and wraps it in `Script.plutusV3` — yielding a unique policy hash per parameter
 
-The policy enforces: the mint must contain exactly one asset whose name equals the parameter, under this policy.
+The policy is a free-mint: any asset name and any quantity can be minted under it. The parameter only serves to make the policy id unique per deployment.
 
 ## Network
 
-Defaults to preprod via `https://blockfrost-preprod.onchainapps.io`. Set `VITE_BLOCKFROST_URL` and `VITE_BLOCKFROST_PROJECT_ID` to use any Blockfrost-compatible backend.
+Set `VITE_BLOCKFROST_URL` and/or `VITE_BLOCKFROST_PROJECT_ID` in `.env.local` to point at any Blockfrost-compatible backend.
