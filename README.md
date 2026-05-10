@@ -1,8 +1,6 @@
 # Token Minter
 
-Standalone Cardano token minter. Compiles a parameterized plu-ts minting policy, lets you connect a CIP-30 wallet, and mints any asset name + amount under a policy parameterized by the bytestring you provide.
-
-Extracted from the Gravity DEX faucet flow.
+Standalone Cardano token minter. Compiles a plu-ts minting policy, lets you connect a CIP-30 wallet, and mints any asset name + amount under a policy parameterized by the bytestring you provide.
 
 ## Setup
 
@@ -21,9 +19,9 @@ The plu-ts policy in `contracts/tokenPolicy.ts` is a single function parameteriz
 
 1. Loads the precompiled UPLC body from `out/scripts.json`
 2. Applies your input `bytestring` via `Application(body, UPLCConst.byteString(param))`
-3. Compiles the result and wraps it in `Script.plutusV3` — yielding a unique policy hash per parameter
+3. Compiles the result and wraps it in `Script.plutusV3` — so you can have a unique policy hash per parameter
 
-The policy is a free-mint: any asset name and any quantity can be minted under it. The parameter only serves to make the policy id unique per deployment.
+The policy is a free-mint: any asset name and any quantity can be minted under it. The parameter only serves to make the policy id unique.
 
 ## Network
 
