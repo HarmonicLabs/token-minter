@@ -1,29 +1,7 @@
-import {
-	Address,
-	DataI,
-	ITxBuildMint,
-	TxBuilder,
-	TxOut,
-	Value,
-	UTxO,
-	toHex,
-	TxWitnessSet,
-} from '@harmoniclabs/buildooor';
-import { WalletApi } from 'use-cardano-wallet';
+import { Address, DataI, ITxBuildMint, TxBuilder, TxOut, Value, UTxO, toHex, TxWitnessSet } from '@harmoniclabs/buildooor';
 import { blockfrost } from '../lib/blockfrost';
 import { tokenPolicy } from './tokenPolicy';
-
-export interface MintAsset {
-	assetName: Uint8Array;
-	amount: bigint;
-}
-
-export interface MintParams {
-	param: Uint8Array;
-	assets: MintAsset[];
-	address: string;
-	api: WalletApi;
-}
+import { MintParams } from '../types/MintParams';
 
 export async function mintTokens({
 	param,

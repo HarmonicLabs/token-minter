@@ -3,15 +3,11 @@ import { useCardanoWallet } from 'use-cardano-wallet';
 import { fromUtf8, fromHex } from '@harmoniclabs/uint8array-utils';
 import { mintTokens } from '../minter/mintTokens';
 import { tokenPolicy } from '../minter/tokenPolicy';
-
-type Encoding = 'utf8' | 'hex';
-
-interface AssetRow {
-	id: number;
-	name: string;
-	encoding: Encoding;
-	amount: string;
-}
+import { Encoding } from '../types/Encoding';
+import { AssetRow } from '../types/AssetRow';
+import { AssetRowInputProps } from '../types/AssetRowInputProps';
+import { FieldProps } from '../types/FieldProps';
+import { ValueWithEncodingProps } from '../types/ValueWithEncodingProps';
 
 function decodeBytes(value: string, encoding: Encoding): Uint8Array {
 	if (!value) return new Uint8Array();
@@ -86,9 +82,9 @@ export function MintForm() {
 			<div>
 				<h2 className="text-xl font-semibold">Mint a token</h2>
 				<p className="text-sm text-zinc-400 mt-1">
-					Pick a policy parameter — it makes your policy id unique per deployment.
-					Then mint any asset name and any quantity under that policy. Add multiple
-					assets to mint them all in one transaction.
+					Pick a policy parameter — it makes your policy id unique per deployment. Then
+					mint any asset name and any quantity under that policy. Add multiple assets to
+					mint them all in one transaction.
 				</p>
 			</div>
 
@@ -162,17 +158,7 @@ export function MintForm() {
 	);
 }
 
-function AssetRowInput({
-	row,
-	canRemove,
-	onChange,
-	onRemove,
-}: {
-	row: AssetRow;
-	canRemove: boolean;
-	onChange: (patch: Partial<AssetRow>) => void;
-	onRemove: () => void;
-}) {
+function AssetRowInput({ row, canRemove, onChange, onRemove }: AssetRowInputProps) {
 	return (
 		<div className="flex gap-2 items-start">
 			<div className="flex-1 flex gap-2">
@@ -213,15 +199,7 @@ function AssetRowInput({
 	);
 }
 
-function Field({
-	label,
-	children,
-	rightSlot,
-}: {
-	label: string;
-	children: React.ReactNode;
-	rightSlot?: React.ReactNode;
-}) {
+function Field({ label, children, rightSlot }: FieldProps) {
 	return (
 		<label className="block">
 			<div className="flex items-center justify-between mb-1.5">
@@ -240,14 +218,7 @@ function ValueWithEncoding({
 	onEncodingChange,
 	placeholder,
 	disabled,
-}: {
-	value: string;
-	onChange: (v: string) => void;
-	encoding: Encoding;
-	onEncodingChange: (e: Encoding) => void;
-	placeholder?: string;
-	disabled?: boolean;
-}) {
+}: ValueWithEncodingProps) {
 	return (
 		<div className="flex gap-2">
 			<input

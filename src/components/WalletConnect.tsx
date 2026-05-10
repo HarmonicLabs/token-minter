@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { useCardanoWallet, WalletName } from 'use-cardano-wallet';
+import { useCardanoWallet } from 'use-cardano-wallet';
+import { DetectedWallet } from '../types/DetectedWallet';
 
 export function WalletConnect() {
 	const { connect, disconnect, isConnected, address, connectedWallet, detectedWallets } =
@@ -35,27 +36,23 @@ export function WalletConnect() {
 					{detectedWallets.length === 0 ? (
 						<p className="text-xs text-zinc-500 p-3">No CIP-30 wallets detected.</p>
 					) : (
-						detectedWallets.map(
-							(w: { name: WalletName; displayName: string; icon?: string }) => (
-								<button
-									key={w.name}
-									onClick={async () => {
-										try {
-											await connect(w.name);
-											setOpen(false);
-										} catch (e) {
-											console.error('Wallet connect failed:', e);
-										}
-									}}
-									className="w-full flex items-center gap-3 px-3 py-2 rounded hover:bg-zinc-800 text-left"
-								>
-									{w.icon && (
-										<img src={w.icon} alt={w.name} width={24} height={24} />
-									)}
-									<span className="text-sm">{w.displayName}</span>
-								</button>
-							)
-						)
+						detectedWallets.map((w: DetectedWallet) => (
+							<button
+								key={w.name}
+								onClick={async () => {
+									try {
+										await connect(w.name);
+										setOpen(false);
+									} catch (e) {
+										console.error('Wallet connect failed:', e);
+									}
+								}}
+								className="w-full flex items-center gap-3 px-3 py-2 rounded hover:bg-zinc-800 text-left"
+							>
+								{w.icon && <img src={w.icon} alt={w.name} width={24} height={24} />}
+								<span className="text-sm">{w.displayName}</span>
+							</button>
+						))
 					)}
 				</div>
 			)}
