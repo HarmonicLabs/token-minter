@@ -45,11 +45,11 @@ export async function mintTokens({
 
 	const adaInputsOnly = inputs.filter((u: UTxO) => Value.isAdaOnly(u.resolved.value));
 	const nonCollateralUtxos = inputs.filter((u: UTxO) => !Value.isAdaOnly(u.resolved.value));
-	const collaterals = inputs.find((u: UTxO) => u.resolved.value.lovelaces >= 5_000_000n && Value.isAdaOnly(u.resolved.value));
+	const collaterals = inputs.find((u: UTxO) => u.resolved.value.lovelaces >= 5_000_000n);
 	const faucetInputs = inputs.filter(	(u: UTxO) => u.resolved.value.lovelaces >= 10_000_000n && Value.isAdaOnly(u.resolved.value));
 
 	if (!collaterals) {
-		console.log(
+		throw new Error(
 			'No suitable collateral UTxO found (need an ada-only input with >= 5 ADA).'
 		);
 	}
